@@ -21,20 +21,14 @@ public class Product {
     private boolean available;
     @Column(name = "quantity")
     private int quantity;
-
-//    @OneToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER, mappedBy = "product")
-//    private List<Review> reviewsList;
-
     public Product() {
     }
-
     public Product(String name, double price, boolean available, int quantity) {
         this.name = name;
         this.price = price;
         this.available = available;
         this.quantity = quantity;
     }
-
     public int getId() {
         return id;
     }
@@ -75,14 +69,6 @@ public class Product {
         this.quantity = quantity;
     }
 
-//    public List<Review> getReviewsList() {
-//        return reviewsList;
-//    }
-//
-//    public void setReviewsList(List<Review> reviewsList) {
-//        this.reviewsList = reviewsList;
-//    }
-
     @Override
     public String toString() {
         return "Product{" +
@@ -91,7 +77,6 @@ public class Product {
                 ", price=" + price +
                 ", available=" + available +
                 ", quantity=" + quantity +
-//                ", reviewsList=" + reviewsList +
                 '}';
     }
 }

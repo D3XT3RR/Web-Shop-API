@@ -12,8 +12,6 @@ import java.util.Optional;
 @Service
 public class ReviewService {
 
-    //TODO: Prawidłowe wyjątki customowe zamiast RuntimeException: DONE
-
     private ReviewRepository reviewRepository;
     private final ProductService productService;
 
@@ -25,7 +23,6 @@ public class ReviewService {
     }
 
     public List<Review> findAll(int productId){
-        //String query = reviewRepository.findByProduct_IdOrderByIdAsc(productId).toString();
         return reviewRepository.findByProduct_IdOrderByIdAsc(productId);
     }
 
@@ -69,8 +66,4 @@ public class ReviewService {
         Optional<Review> optionalReview = reviewRepository.findByProduct_IdAndId(productId, reviewId);
         return optionalReview.isPresent();
     }
-
-
-
-
 }

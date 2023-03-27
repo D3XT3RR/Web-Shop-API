@@ -27,9 +27,6 @@ public class User {
     @Column(name = "enabled")
     private boolean enabled;
 
-//    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
-//    private Role role;
-
     public User() {
     }
 
@@ -91,25 +88,15 @@ public class User {
         this.enabled = enabled;
     }
 
-//    public Role getRole() {
-//        return role;
-//    }
-//
-//    public void setRole(Role role) {
-//        this.role = role;
-//    }
-
     @Override
     public String toString() {
         return "User{" +
-//                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 ", address='" + address + '\'' +
                 ", enabled=" + enabled +
- //               ", role=" + role +
                 '}';
     }
 }

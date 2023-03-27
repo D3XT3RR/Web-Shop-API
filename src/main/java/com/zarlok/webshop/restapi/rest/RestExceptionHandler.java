@@ -74,10 +74,6 @@ public class RestExceptionHandler {
         return response(exception, HttpStatus.FORBIDDEN);
     }
 
-    //TODO: HttpMessageNotReadableException handler: DONE
-    //TODO: RequestRejectedException handler: DONE
-
-
     // Helper Method
     private ResponseEntity<ErrorResponse> response(Exception e, HttpStatus httpStatus){
         ErrorResponse errorResponse = new ErrorResponse();

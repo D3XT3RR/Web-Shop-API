@@ -48,8 +48,4 @@ public class ProductRestController {
     public void deleteById(@PathVariable int productId){
         productService.deleteById(productId);
     }
-
-
-    //TODO: Odpowiedź od serwera w odpowiedniej postaci.
-
 }

@@ -29,7 +29,6 @@ public class SpringSecurityConfig{
     @Bean
     protected SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable();
-        //httpSecurity.authorizeRequests().antMatchers("/products/**").hasRole("ADMIN");
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.DELETE, "/users/**").hasRole("ADMIN");
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.POST, "/users/**").hasRole("ADMIN");
         httpSecurity.authorizeRequests().antMatchers(HttpMethod.PUT, "/users/**").hasRole("ADMIN");
