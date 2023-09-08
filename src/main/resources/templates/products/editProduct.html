@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>food4you - produkty</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/uicons-solid-straight.css}">
+</head>
+<body>
+<div id="wrapper">
+    <header>
+        <a th:href="@{/}"><h2 >Sklep internetowy</h2 ></a>
+    </header>
+</div>
+<div id="container">
+    <div id="content">
+        <div id="photo">
+            <div class="photoHolder">
+                <div th:if="${imageExist}">
+                    <img
+                            th:src="@{/images/products/{id}.jpg(id=${product.id})}"
+                            alt="Zdjęcie"
+                    >
+                </div>
+                <div th:if="!${imageExist}">brak zdjęcia
+                </div>
+
+            </div>
+
+            <div class="btnHolder" th:if="${imageExist}"><button class="btn-submit btn" onclick="dialog.showModal()">zmień zdjęcie</button></div>
+            <div class="btnHolder" th:if="!${imageExist}"><button class="btn-submit btn" onclick="dialog.showModal()">dodaj zdjęcie</button></div>
+        </div>
+        <div id="dataEdition">
+            <form th:action="@{/products}" th:object="${product}" method="post" class="form-row">
+                <input type="hidden" th:field="*{id}">
+                <div id="formData">
+                <label>nazwa
+                    <input type="text" th:field="*{name}">
+                </label>
+                <label>cena
+                    <input type="number" th:field="*{price}">
+                </label>
+
+                <label>dostępność
+                    <input type="checkbox" th:field="*{available}">
+                </label>
+
+                <label>ilość
+                    <input type="number" th:field="*{quantity}">
+                </label>
+                <label>kategoria
+                    <select th:field="*{category}">
+                        <option th:each="category : ${categories}"
+                                th:value="${category.id}"
+                                th:text="${category.name}"></option>
+                    </select>
+                </label>
+                </div>
+                <button type="submit" value="Submit" class="btn-submit">zapisz</button>
+            </form>
+        </div>
+    </div>
+
+
+    <dialog id="dialog">
+        <form method="post" th:action="@{/products/{id}/uploadPhoto(id=${product.id})}" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" class="form-control-file" >
+            <button type="submit" class="btn btn-submit">zapisz obraz</button>
+        </form>
+    </dialog>
+    </div>
+</div>
+
+</body>
+</html>

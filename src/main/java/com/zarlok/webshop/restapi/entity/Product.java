@@ -1,9 +1,7 @@
 package com.zarlok.webshop.restapi.entity;
 
 
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "product")
@@ -21,13 +19,26 @@ public class Product {
     private boolean available;
     @Column(name = "quantity")
     private int quantity;
+
+    @ManyToOne
+    @JoinColumn(name = "unit_id")
+    private Unit unit;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
+
     public Product() {
     }
-    public Product(String name, double price, boolean available, int quantity) {
+    public Product(String name, double price, boolean available, int quantity, Unit unit, Category category) {
         this.name = name;
         this.price = price;
         this.available = available;
         this.quantity = quantity;
+        this.unit = unit;
+        this.category = category;
     }
     public int getId() {
         return id;
@@ -69,6 +80,22 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public Unit getUnit() {
+        return unit;
+    }
+
+    public void setUnit(Unit unit) {
+        this.unit = unit;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
@@ -77,6 +104,8 @@ public class Product {
                 ", price=" + price +
                 ", available=" + available +
                 ", quantity=" + quantity +
+                ", unit= "+ unit +
+                ", category=" + category +
                 '}';
     }
 }

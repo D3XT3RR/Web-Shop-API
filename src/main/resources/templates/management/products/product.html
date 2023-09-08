@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>food4you - produkty</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/uicons-solid-straight.css}">
+</head>
+<!--body>
+<table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>price</th>
+        <th>availability</th>
+        <th>quantity</th>
+    </tr>
+    <tr th:each="product: ${products}">
+        <td th:text="${product.id}" />
+        <td th:text="${product.name}" />
+        <td th:text="${product.price}" />
+        <td th:text="${product.available}" />
+        <td th:text="${product.quantity}" />
+    </tr>
+</table>
+
+</body-->
+<body>
+<div id="wrapper">
+    <header>
+        <a th:href="@{/}"><h2 >Sklep internetowy</h2 ></a>
+    </header>
+</div>
+<div id="container">
+    <div id="content">
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Price</th>
+                <th>Available</th>
+                <th>Review</th>
+                <th>Review</th>
+                <th>Category</th>
+            </tr>
+                <td th:text="${product.id}" />
+                <td th:text="${product.name}" />
+                <td th:text="${product.price}" />
+                <td th:text="${product.available}" />
+                <td th:text="${product.quantity}" />
+                <td><a th:href="@{/api/products/{id}(id=${product.id})}">View</a>
+                </td>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

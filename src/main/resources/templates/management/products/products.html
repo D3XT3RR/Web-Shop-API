@@ -1,0 +1,161 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pl">
+<head>
+    <title>food4you - kategorie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/management.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/editStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/listStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/uicons-solid-straight.css}">
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <a th:href="@{/}" id="logo">
+            <i class="fi fi-ss-store-alt" id="logo-pic"></i>
+            <div id="logo-text">
+                <h2>FOOD4YOU</h2>
+                <h5>your daily freshness</h5>
+            </div>
+        </a>
+        <div id="search-bar">
+            <form th:action="@{/products/search}">
+                <input type="search" placeholder="Czego szukasz?" name="keyword">
+                <button class="button"><i class="fi fi-ss-search"></i></button>
+            </form>
+        </div>
+        <nav>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/management}" class="button" title="zarządzaj"><i class="fi fi-ss-settings"></i></a>
+            <a th:href="@{/cart}" class="button" title="koszyk"><i class="fi fi-ss-shopping-cart"></i></a>
+            <a th:href="@{/logout}" class="button logout-button" title="Wyloguj"><i class="fi fi-ss-sign-out-alt"></i></a>
+            <button type="button" class="button menu-button" id="menu-button" onclick="openMenu()" title="menu"><i class="fi fi-ss-menu-burger"></i></button>
+        </nav>
+
+    </header>
+    <nav>
+        <div id="menu">
+            <a th:href="@{/}">twoje zamówienia</a>
+            <a th:href="@{/}">twoje dane</a>
+        </div>
+    </nav>
+</div>
+
+<div id="container">
+    <nav id="management-menu">
+        <div>
+            <a th:href="@{/management/categories}" class="management-button">Kategorie</a>
+            <a th:href="@{/management/products}" class="management-button">Produkty</a>
+            <a th:href="@{/management/orders}" class="management-button">Zamówienia</a>
+            <a th:href="@{/management/users}" class="management-button">Użytkownicy</a>
+        </div>
+    </nav>
+    <div id="content">
+        <div id="title">
+            <h1>Zarządzanie produktami</h1>
+        </div>
+        <table>
+            <tr>
+                <th>obraz</th>
+                <th>nazwa</th>
+                <th>kategoria</th>
+                <th>cena</th>
+                <th>dostępność</th>
+                <th>opinie</th>
+                <th>opcje</th>
+            </tr>
+            <tr th:each="product: ${products}">
+                <dialog class="dataEdition"  th:id="@{dialog{id}(id=${product.id})}">
+                        <form th:action="@{/management/products}"  th:object="${product}" method="post" class="form-row">
+                            <input type="hidden" th:value="*{id}" id="id" name="id">
+                            <div id="formData">
+                                <label>nazwa
+                                    <input type="text" th:value="*{name}" name="name">
+                                </label>
+                                <label>cena
+                                    <input type="number" th:value="*{price}" name="price">
+                                </label>
+                                <label>jednostka miary
+                                    <select th:value="*{unit}" name="unit">
+                                        <option th:each="unit : ${units}"
+                                                th:value="${unit.id}"
+                                                th:text="${unit.name}"></option>
+                                    </select>
+                                </label>
+
+                                <label>dostępność
+                                    <input type="checkbox" th:value="*{available}" name="available" th:checked="*{available}">
+                                </label>
+
+                                <label>ilość
+                                    <input type="number" th:value="*{quantity}" name="available">
+                                </label>
+                                <label>kategoria
+                                    <select th:value="*{category}" name="category">
+                                        <option th:each="category : ${categories}"
+                                                th:value="${category.id}"
+                                                th:text="${category.name}"></option>
+                                    </select>
+                                </label>
+                            </div>
+                            <button type="submit" value="Submit" class="btn-submit">zapisz</button>
+                    </form>
+                </dialog>
+                <dialog class="photoEdition" th:id="@{dialog_photo{id}(id=${product.id})}">
+                    <form method="post" th:action="@{/management/products/{id}/uploadPhoto(id=${product.id})}" enctype="multipart/form-data">
+                        <input type="file" name="image" accept="image/*" class="form-control-file" >
+                        <button type="submit" class="btn btn-submit">zapisz obraz</button>
+                    </form>
+                </dialog>
+                <td><img th:src="@{/images/products/{id}.jpg(id=${product.id})}" width="100" alt="Zdjęcie"></td>
+                <td th:text="${product.name}" />
+                <td th:text="${product.category.name}"/>
+                <td th:text="@{{price} zł/{unit}(price=${product.price}, unit=${product.unit.name})}" />
+                <td>
+                    <i th:if="${product.available} == true" class="fi fi-ss-check"></i>
+                    <i th:if="${product.available} == false" class="fi fi-ss-cross"></i>
+                </td>
+                <td th:text="${product.quantity}" />
+                <td>
+                    <div class="btn-menu">
+                        <a th:href="@{/products/{id}(id=${product.id})}"><i class="fi fi-ss-eye"></i></a>
+                        <a th:onclick="@{dialog_photo{id}.showModal()(id=${product.id})}"><i class="fi fi-ss-edit"></i></a>
+                        <a th:onclick="@{dialog{id}.showModal()(id=${product.id})}"><i class="fi fi-ss-pencil"></i></a>
+                        <a th:href="@{/products/{id}/delete(id=${product.id})}"><i class="fi fi-ss-cross"></i></a>
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+
+<script>
+    // When the user clicks on div, open the popup
+    function openMenu() {
+        var menuButton = document.getElementById("menu-button");
+        var menu = document.getElementById("menu");
+
+
+        menu.style.opacity = "1.0";
+        menu.style.height = "auto";
+        menuButton.style.color = "white";
+        menuButton.setAttribute("onclick", "closeMenu()")
+
+
+    }
+    function closeMenu(){
+        var menuButton = document.getElementById("menu-button");
+        var menu = document.getElementById("menu");
+        menu.style.opacity = "0.0";
+        menu.style.height = "0";
+        menuButton.style.color = "";
+        menuButton.setAttribute("onclick", "openMenu()")
+    }
+</script>
+
+</body>
+</html>

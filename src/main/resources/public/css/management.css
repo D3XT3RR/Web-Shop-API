@@ -1,0 +1,41 @@
+#management-menu{
+    display: flex;
+    width: 100%;
+    /* height:700px; */
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: #2ecc71;
+}
+
+#management-menu div{
+    display: flex;
+    background-color: #2ecc71;
+    height: 100%;
+    width: 50%;
+    flex-direction: row;
+}
+
+.management-button{
+    font-size: 13px;
+    padding: 0 5px 0 5px;
+    border: 0;
+    height: 30px;
+    background-color: #2ecc71;
+}
+
+.management-button:hover{
+    background-color: #1D262D;
+    color: #2ecc71;
+
+}
+
+.active{
+    background-color: #0E2A47;
+    color: #2ecc71;
+}
+
+#content{
+    padding-top: 30px !important;
+    width: 100% !important;
+}
+

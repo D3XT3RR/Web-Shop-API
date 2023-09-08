@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security" lang="pl">
+<head>
+    <title>food4you - kategorie</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/listStyle.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/uicons-solid-straight.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/management.css}">
+</head>
+<body>
+<div id="wrapper">
+    <header id="header">
+        <a th:href="@{/}" id="logo">
+            <i class="fi fi-ss-store-alt" id="logo-pic"></i>
+            <div id="logo-text">
+                <h2>FOOD4YOU</h2>
+                <h5>your daily freshness</h5>
+            </div>
+        </a>
+        <div id="search-bar">
+            <form th:action="@{/products/search}">
+                <input type="search" placeholder="Czego szukasz?" name="keyword">
+                <button class="button"><i class="fi fi-ss-search"></i></button>
+            </form>
+        </div>
+        <nav>
+            <a sec:authorize="hasRole('ADMIN')" th:href="@{/management}" class="button" title="zarządzaj"><i class="fi fi-ss-settings"></i></a>
+            <a th:href="@{/cart}" class="button" title="koszyk"><i class="fi fi-ss-shopping-cart"></i></a>
+            <a th:href="@{/logout}" class="button logout-button" title="Wyloguj"><i class="fi fi-ss-sign-out-alt"></i></a>
+            <button type="button" class="button menu-button" id="menu-button" onclick="openMenu()" title="menu"><i class="fi fi-ss-menu-burger"></i></button>
+        </nav>
+
+    </header>
+    <nav>
+        <div id="menu">
+            <a th:href="@{/}">twoje zamówienia</a>
+            <a th:href="@{/}">twoje dane</a>
+        </div>
+    </nav>
+</div>
+
+<div id="container">
+    <nav id="management-menu">
+        <div>
+            <a th:href="@{/management/categories}" class="management-button">Kategorie</a>
+            <a th:href="@{/management/products}" class="management-button">Produkty</a>
+            <a th:href="@{/management/orders}" class="management-button">Zamówienia</a>
+            <a th:href="@{/management/users}" class="management-button">Użytkownicy</a>
+        </div>
+    </nav>
+    <div id="content">
+        <div id="title">
+            <h1>zarządzaj</h1>
+        </div>
+
+        <div id="elements">
+            <div class="element">
+                <a th:href="@{/management/categories}">
+                    <div class="name" th:text="kategorie"></div>
+                </a>
+            </div>
+            <div class="element">
+                <a th:href="@{/management/products}">
+                    <div class="name" th:text="produkty"></div>
+                </a>
+            </div>
+            <div class="element">
+                <a th:href="@{/management/orders}">
+                    <div class="name" th:text="zamówienia"></div>
+                </a>
+            </div>
+            <div class="element">
+                <a th:href="@{/management/users}">
+                    <div class="name" th:text="użytkownicy"></div>
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    // When the user clicks on div, open the popup
+    function openMenu() {
+        var menuButton = document.getElementById("menu-button");
+        var menu = document.getElementById("menu");
+
+
+        menu.style.opacity = "1.0";
+        menu.style.height = "auto";
+        menuButton.style.color = "white";
+        menuButton.setAttribute("onclick", "closeMenu()")
+
+
+    }
+    function closeMenu(){
+        var menuButton = document.getElementById("menu-button");
+        var menu = document.getElementById("menu");
+        menu.style.opacity = "0.0";
+        menu.style.height = "0";
+        menuButton.style.color = "";
+        menuButton.setAttribute("onclick", "openMenu()")
+    }
+</script>
+
+</body>
+</html>

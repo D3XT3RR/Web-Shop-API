@@ -1,0 +1,317 @@
+html, body{
+    position: initial;
+    margin: 0;
+    padding:0;
+    font-family:Verdana, Arial, Helvetica, sans-serif;
+    background-color: #ecf0f1;
+}
+
+table {
+    border-collapse:collapse;
+    border-bottom:0 solid gray;
+    font-family: Tahoma,Verdana,Segoe,sans-serif;
+    width:100%;
+}
+
+th {
+    border-bottom:0 solid gray;
+    background:none repeat scroll 0 0 #27ae60;
+    padding:10px;
+    color: #ecf0f1;
+}
+
+tr {
+    border-top:0 solid gray;
+    height: 25px;
+    text-align:center;
+}
+
+td{
+    align-items: center;
+    justify-content: center;
+}
+
+tr:nth-child(even) {background: #ecf0f1}
+tr:nth-child(odd) {background: #bdc3c7}
+
+a {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    text-decoration: 0;
+    color: black;
+    align-content: space-between;
+    flex-direction: row;
+}
+
+
+
+#wrapper {
+    width: 100%;
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+header {width: 100%;display: flex;background: #27ae60;margin-top: 0;padding: 15px 0 15px 0;justify-content: space-between;}
+
+#container {
+    width: 100%;
+    margin:0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+#container h3 {color: #000;}
+#container #content {
+    padding: 0;
+    margin: 0;
+    width: 70%;
+}
+
+#title{
+    text-align: center;
+}
+
+#logo{
+    /* vertical-align: middle; */
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-content: flex-start;
+    align-items: center;
+    padding-left: 10px;
+}
+
+#logo h2{
+    margin: 0;
+
+    color: #ecf0f1;
+}
+
+#logo h5{
+    margin: 0;
+}
+
+#logo-pic{
+    display: flex;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
+    padding-top: 5px;
+    font-size: 38px;
+    align-content: space-around;
+    align-items: center;
+}
+
+#logo-text{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-content: flex-start;
+    align-items: center;
+}
+
+#search-bar{
+    width: 30%;
+    display: flex;
+    align-items: center;
+}
+
+#search-bar form{
+    width: 100%;
+    height: 75%;
+    display: flex;
+    background-color: #27ae60;
+    flex-direction: row;
+}
+
+#search-bar form input{
+    transition: 200ms all;
+    width: 100%;
+    font-size: 20px;
+    border-width: 0 0 1px 0;
+    margin: 0 0 2px;
+    height: 100%;
+    outline: none;
+    border-color: black;
+    background-color: #27ae60;
+    text-align: left;
+    color: white;
+}
+
+#search-bar form input::placeholder{
+    transition: 200ms all;
+    color: #CFD9E0;
+    font-size: 15px;
+}
+
+#search-bar form input:focus, #search-bar form input:hover{
+    border-width: 0 0 2px 0;
+
+    font-weight: lighter;
+    margin-bottom: 1px;
+    transition: 200ms all;
+    outline: none;
+    border-color: black;
+
+}
+
+#search-bar form input:hover::placeholder, #search-bar form input:focus::placeholder{
+    transition: 200ms all;
+    font-size: 20px;
+}
+
+
+
+
+nav{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    /* width: 70%; */
+    margin: 0;
+    padding: 0;
+}
+
+#command{
+    padding: 0;
+    margin: 0;
+    width: 25%;
+    align-self: flex-end;
+}
+
+.button {
+    /* padding-top: 5px; */
+    height: 100%;
+    border: 0 solid #2ecc71;
+    padding: 0;
+    border-radius: 0;
+    font-size: 20px;
+    font-weight: bold;
+    width: 40px;
+    background: #27ae60;
+    transition: all 200ms;
+    line-height: normal;
+}
+
+
+
+.button:hover{
+    transition: all 200ms;
+    color: white;
+}
+
+.logout-button:hover{
+    /*background-color: #27ae60;*/
+    transition: all 200ms;
+    color: #e74c3c;
+    content: "LOGOUT";
+}
+
+
+
+
+
+.add-button {
+    height: 30px;
+    border: 0 solid #27ae60;
+    border-radius: 0;
+    font-size: 15px;
+    font-weight: bold;
+    width: 5%;
+    background: #2ecc71;
+    transition: all 200ms;
+}
+
+.add-button:hover{
+    background-color: #27ae60;
+    transition: all 200ms;
+    font-size: 13px;
+}
+
+.action-button{
+    text-align: center;
+    font-size: 15px;
+    color: black;
+    background-color: #2ecc71;
+    text-decoration: none;
+    padding: 3px;
+    border-radius: 4px;
+    transition: all 200ms;
+}
+
+.action-button:hover{
+    color: black;
+    background-color: #27ae60;
+    text-decoration: none;
+    transition: all 200ms;
+}
+
+.action-button:visited{
+    color: black;
+    text-decoration: none;
+}
+
+.action-button.delete-button:hover{
+    background-color: #c0392b;
+}
+
+.action-button.delete-button{
+    background-color: #e74c3c;
+}
+
+.action-button.update-button{
+    background-color: #2ecc71;
+}
+
+.action-button.update-button:hover{
+    background-color: #27ae60;
+}
+
+
+
+.btn-menu{
+    /* width: 100px; */
+    font-size: 17px;
+    height: 45px;
+    display: flex;
+    flex-direction: row;
+    align-content: space-between;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-menu a{
+    padding: 0 10px 0 10px;
+}
+
+#menu{
+    right: 0;
+    width: 200px;
+    height: 0;
+    opacity: 0;
+    position: absolute;
+    transition: all 200ms;
+    background-color: #2ecc71;
+}
+
+#menu:focus{
+    background-color: #4A6375;
+    visibility: visible;
+}
+
+#menu a{
+    height: 30px;
+    transition: all 200ms;
+}
+#menu a:hover{
+    background-color: #1D262D;
+    color: #2ecc71;
+    transition: all 100ms;
+}
+
+
+
