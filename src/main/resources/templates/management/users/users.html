@@ -66,8 +66,7 @@
             </tr>
             <tr th:each="user: ${users}">
                 <dialog class="dataEdition"  th:id="@{dialog{id}(id=${user.username})}">
-                    <form th:action="@{/management/users}"  th:object="${user}" method="post" class="form-row">
-
+                    <form th:action="@{/management/users/{username}(username=${user.username})}"  th:object="${user}" method="post" class="form-row">
                         <div id="formData">
                             <label>nazwa użytkownika
                                 <input type="text" th:value="*{username}" name="username">
@@ -79,11 +78,24 @@
                                 <input type="text" th:value="*{lastName}" name="lastName">
                             </label>
                             <label>aktywny
-                                <input type="checkbox" th:value="*{enabled}" name="enabled" th:checked="*{enabled}">
+                                <input type="radio" th:value="true" name="enabled" th:checked="*{enabled}">
+                                <label for="true">true</label>
+                                <input th:type="radio" th:value="false" name="enabled" th:checked="!*{enabled}">
+                                <label for="false">false</label>
                             </label>
 
                             <label>e-mail
                                 <input type="text" th:value="*{email}" name="email">
+                            </label>
+                        </div>
+                        <button type="submit" value="Submit" class="btn-submit">zapisz</button>
+                    </form>
+                </dialog>
+                <dialog class="dataEdition"  th:id="@{dialog{id}password(id=${user.username})}">
+                    <form th:action="@{/management/users/{username}/password(username=${user.username})}"  enctype="multipart/form-data" method="post" class="form-row">
+                        <div id="formData">
+                            <label>haslo
+                                <input type="password" name="password">
                             </label>
                         </div>
                         <button type="submit" value="Submit" class="btn-submit">zapisz</button>
@@ -101,7 +113,7 @@
                 <td>
                     <div class="btn-menu">
                         <a th:href="@{/users/{id}(id=${user.username})}"><i class="fi fi-ss-eye"></i></a>
-                        <a th:onclick="@{dialog_photo{id}.showModal()(id=${user.username})}"><i class="fi fi-ss-edit"></i></a>
+                        <a th:onclick="@{dialog{id}password.showModal()(id=${user.username})}"><i class="fi fi-ss-edit"></i></a>
                         <a th:onclick="@{dialog{id}.showModal()(id=${user.username})}"><i class="fi fi-ss-pencil"></i></a>
                         <a th:href="@{/users/{id}/delete(id=${user.username})}"><i class="fi fi-ss-cross"></i></a>
                     </div>

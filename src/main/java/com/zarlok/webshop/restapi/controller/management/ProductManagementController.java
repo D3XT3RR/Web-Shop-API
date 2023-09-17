@@ -18,7 +18,6 @@ public class ProductManagementController {
 
     private final ProductService productService;
     private final CategoryService categoryService;
-
     private final UnitService unitService;
 
     @Autowired
@@ -37,7 +36,7 @@ public class ProductManagementController {
     }
 
     @PostMapping
-    public String saveProduct(@ModelAttribute Product product, @RequestHeader("Referer") String referer){
+    public String saveProduct(@ModelAttribute Product product){
 
         productService.save(product);
 

@@ -55,6 +55,24 @@ public class UserService {
         return userRepository.save(user);
     }
 
+    public User updateDetails(User user, String username){
+        System.err.println("FormUser: "+user.toString());
+        User actualUser = findByUsername(username);
+        actualUser.setEmail(user.getEmail());
+        actualUser.setFirstName(user.getFirstName());
+        actualUser.setLastName(user.getLastName());
+        actualUser.setEnabled(user.isEnabled());
+        System.err.println("ActualUser: "+actualUser.toString());
+        return userRepository.save(actualUser);
+    }
+
+    public User updatePassword(String username, String newPassword){
+        User actualUser = findByUsername(username);
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        actualUser.setPassword(encodedPassword);
+        return userRepository.save(actualUser);
+    }
+
     @Transactional
     public void deleteByUsername(String username){
         userRepository.deleteByUsername(username);
